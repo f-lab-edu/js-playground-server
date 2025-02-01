@@ -1,6 +1,7 @@
 import express, { Application, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import { connectDB } from './db.js';
 
 dotenv.config();
 const app: Application = express();
@@ -13,5 +14,6 @@ app.get('/', (req: Request, res: Response) => {
 app.listen(PORT, () => {
   console.log(`✅ 서버 실행: http://localhost:${PORT}`);
 });
+connectDB();
 
 export default app;
