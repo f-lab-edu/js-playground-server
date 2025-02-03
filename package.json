@@ -21,12 +21,12 @@
     "typescript": "^5.7.3"
   },
   "scripts": {
-    "dev": "NODE_OPTIONS='--loader ts-node/esm' nodemon src/server.ts",
+    "dev": "nodemon --exec ts-node src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
-    "prettier": "prettier --write \"src/**/*.ts\""
-  },
-  "type": "module"
+    "prettier": "prettier --write \"src/**/*.ts\"",
+    "seed": "npx ts-node src/scripts/insertQuiz.ts"
+  }
 }
