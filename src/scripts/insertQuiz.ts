@@ -8,119 +8,102 @@ const insertQuiz = async () => {
     console.log('mongodb성공');
     const quizzes = [
       {
-        id: 1,
+        id: '1',
         title: '첫 번째 퀴즈',
-        description: '가데이터로 제공되는 첫 번째 퀴즈 설명입니다.',
-        codeTemplate:
-          "function example() {\n  console.log('Hello, world!');\n}",
-        answer: 'Hello, world!',
-        hint: '코드를 작성하고 결과를 확인하세요.',
+        description: '목표 지점까지 이동한 후 공격하세요.',
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [2, 0, 0, 0],
         ],
+        hint: '첫번쨰 힌트',
         startPosition: { x: 0, y: 0 },
+        goalPosition: { x: 2, y: 0 },
+        goalAction: 'shoot',
         commands: [
           {
             name: 'forward',
-            function: () => {
-              console.log('move forward');
-            },
+            functionCode: "console.log('move forward');",
           },
           {
             name: 'shoot',
-            function: () => {
-              console.log('shoot');
-            },
+            functionCode: "console.log('shoot');",
           },
         ],
       },
       {
-        id: 2,
-        title: '조건문과 반복문',
-        description: '조건문과 반복문을 사용하여 로직을 구현해봅시다.',
-        codeTemplate: '두번째 codeTemplate',
-        answer: '2번 정답',
-        hint: '2번 힌트',
+        id: '2',
+        title: '두 번째 퀴즈',
+        description: '목표 지점까지 이동한 후 공격하세요.',
         grid: [
-          [0, 0, 2, 0],
-          [0, 1, 2, 0],
-          [0, 0, 2, 0],
-          [0, 0, 2, 0],
-        ],
-        startPosition: { x: 0, y: 0 },
-        commands: [
-          {
-            name: 'forward',
-            function: () => {
-              console.log('move forward');
-            },
-          },
-          {
-            name: 'shoot',
-            function: () => {
-              console.log('shoot');
-            },
-          },
-        ],
-      },
-      {
-        id: 3,
-        title: '함수와 스코프',
-        description: 'JavaScript 함수와 스코프에 대해 알아봅시다.',
-        codeTemplate: '세번째 codeTemplate',
-        answer: '3번 정답',
-        hint: '3번힌트',
-        grid: [
-          [0, 0, 0, 3],
-          [0, 1, 0, 3],
-          [0, 0, 2, 0],
           [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [2, 0, 0, 0],
         ],
+        hint: '두번쨰 힌트',
         startPosition: { x: 0, y: 0 },
+        goalPosition: { x: 2, y: 0 },
+        goalAction: 'shoot',
         commands: [
           {
             name: 'forward',
-            function: () => {
-              console.log('move forward');
-            },
+            functionCode: "console.log('move forward');",
           },
           {
             name: 'shoot',
-            function: () => {
-              console.log('shoot');
-            },
+            functionCode: "console.log('shoot');",
           },
         ],
       },
       {
-        id: 4,
-        title: 'ES6+ 문법',
-        description: '최신 JavaScript 문법(ES6+)을 학습합니다.',
-        codeTemplate: '네번째 codeTemplate',
-        answer: '4번정답',
-        hint: '4번힌트',
+        id: '3',
+        title: '세 번째 퀴즈',
+        description: '목표 지점까지 이동한 후 공격하세요.',
         grid: [
-          [0, 4, 4, 4],
-          [0, 1, 0, 0],
-          [0, 0, 2, 0],
           [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [2, 0, 0, 0],
         ],
+        hint: '세번쨰 힌트',
         startPosition: { x: 0, y: 0 },
+        goalPosition: { x: 2, y: 0 },
+        goalAction: 'shoot',
         commands: [
           {
             name: 'forward',
-            function: () => {
-              console.log('move forward');
-            },
+            functionCode: "console.log('move forward');",
           },
           {
             name: 'shoot',
-            function: () => {
-              console.log('shoot');
-            },
+            functionCode: "console.log('shoot');",
+          },
+        ],
+      },
+      {
+        id: '4',
+        title: '네 번째 퀴즈',
+        description: '목표 지점까지 이동한 후 공격하세요.',
+        grid: [
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [0, 0, 0, 0],
+          [2, 0, 0, 0],
+        ],
+        hint: '세번쨰 힌트',
+        startPosition: { x: 0, y: 0 },
+        goalPosition: { x: 2, y: 0 },
+        goalAction: 'shoot',
+        commands: [
+          {
+            name: 'forward',
+            functionCode: "console.log('move forward');",
+          },
+          {
+            name: 'shoot',
+            functionCode: "console.log('shoot');",
           },
         ],
       },
