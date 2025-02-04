@@ -1,9 +1,23 @@
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "target": "ESNext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "outDir": "dist",
+    "rootDir": "src",
+    "strict": true,
     "esModuleInterop": true,
+    "allowJs": true,
     "resolveJsonModule": true,
-    "outDir": "./dist"
-  }
+    "noEmit": true,
+    "baseUrl": "./",
+    "paths": {
+      "@models/*": ["src/models/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@services/*": ["src/services/*"]
+    },
+    "allowImportingTsExtensions": true // ✅ `.ts` 확장자를 포함한 import 허용
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "dist"]
 }

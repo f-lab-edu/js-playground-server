@@ -1,6 +1,6 @@
-const mongoose = require('mongoose');
-const { MONGO_URI } = require('../db');
-const { Quiz } = require('../model/quiz');
+import mongoose from 'mongoose';
+import { MONGO_URI } from '../db.ts';
+import { Quiz } from '../model/quiz.ts';
 
 const insertQuiz = async () => {
   try {
@@ -140,5 +140,3 @@ const insertQuiz = async () => {
 };
 
 insertQuiz();
-
-module.exports = { insertQuiz };
