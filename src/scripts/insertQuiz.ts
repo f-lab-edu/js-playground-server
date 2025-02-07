@@ -113,19 +113,15 @@ const insertQuiz = async () => {
         ],
       },
     ];
-
-    for (const quiz of quizzes) {
-      const quizId = v4();
-      await Quiz.findOneAndUpdate(
-        { id: quizId },
-        { $setOnInsert: { ...quiz, id: quizId } },
-        { upsert: true, new: true }
-      );
-    }
+    const quizzesWithUUID = quizzes.map((quiz) => ({
+      ...quiz,
+      id: v4(),
+    }));
+    await Quiz.insertMany(quizzesWithUUID);
     process.exit(0);
   } catch (error) {
+    console.error('오류 발생:', error);
     process.exit(1);
   }
 };
-
 insertQuiz();

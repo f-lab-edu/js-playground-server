@@ -14,7 +14,6 @@ app.use(cors());
 app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript 서버 실행 중!');
 });
-
 app.get(
   '/api/quizzes/:id',
   async (req: Request<{ id: string }>, res: Response): Promise<void> => {
@@ -39,8 +38,7 @@ app.get(
     }
   }
 );
-
-app.get(`api/quizzes`, async (req: Request, res: Response): Promise<void> => {
+app.get(`/api/quizzes`, async (req: Request, res: Response): Promise<void> => {
   try {
     const quizzes = await Quiz.find({}, 'id title');
     res.json(quizzes);
@@ -49,7 +47,6 @@ app.get(`api/quizzes`, async (req: Request, res: Response): Promise<void> => {
     res.status(500).json({ error: '퀴즈 조회 오류' });
   }
 });
-
 app.listen(PORT, () => {
   console.log(`서버 실행: http://localhost:${PORT}`);
 });
