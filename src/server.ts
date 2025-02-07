@@ -3,6 +3,7 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './db.ts';
 import { Quiz } from './model/quiz.ts';
+import { validate } from 'uuid';
 
 dotenv.config();
 
@@ -18,11 +19,11 @@ app.get(
   '/api/quizzes/:id',
   async (req: Request<{ id: string }>, res: Response): Promise<void> => {
     try {
-      const quizId = parseInt(req.params.id, 10);
-      if (isNaN(quizId)) {
+      const quizId = req.params.id;
+      if (!validate(quizId)) {
         res
           .status(400)
-          .json({ success: false, message: '올바른 ID 입력하세요.' });
+          .json({ success: false, message: '유효한 uuid 입력부탁' });
         return;
       }
       const quiz = await Quiz.findOne({ id: quizId });
@@ -38,6 +39,16 @@ app.get(
     }
   }
 );
+
+app.get(`api/quizzes`, async (req: Request, res: Response): Promise<void> => {
+  try {
+    const quizzes = await Quiz.find({}, 'id title');
+    res.json(quizzes);
+  } catch (error) {
+    console.error('퀴즈 조회 오류', error);
+    res.status(500).json({ error: '퀴즈 조회 오류' });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`서버 실행: http://localhost:${PORT}`);

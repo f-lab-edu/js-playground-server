@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { MONGO_URI } from '../db.ts';
 import { Quiz } from '../model/quiz.ts';
+import { v4 } from 'uuid';
 
 const insertQuiz = async () => {
   try {
@@ -40,11 +41,11 @@ const insertQuiz = async () => {
           [0, 0, 0, 0],
           [0, 0, 0, 0],
           [0, 0, 0, 0],
-          [2, 0, 0, 0],
+          [0, 0, 0, 2],
         ],
-        hint: '두번쨰 힌트',
+        hint: '두번쨰 힌트 방향을 바꿀수 있어요~',
         startPosition: { x: 0, y: 0 },
-        goalPosition: { x: 2, y: 0 },
+        goalPosition: { x: 3, y: 3 },
         goalAction: 'shoot',
         commands: [
           {
@@ -54,6 +55,10 @@ const insertQuiz = async () => {
           {
             name: 'shoot',
             functionCode: "console.log('shoot');",
+          },
+          {
+            name: 'turnRight',
+            functionCode: "console.log('turnRight');",
           },
         ],
       },
@@ -92,7 +97,7 @@ const insertQuiz = async () => {
           [0, 0, 0, 0],
           [2, 0, 0, 0],
         ],
-        hint: '세번쨰 힌트',
+        hint: '네번쨰 힌트',
         startPosition: { x: 0, y: 0 },
         goalPosition: { x: 2, y: 0 },
         goalAction: 'shoot',
@@ -110,9 +115,10 @@ const insertQuiz = async () => {
     ];
 
     for (const quiz of quizzes) {
+      const quizId = v4();
       await Quiz.findOneAndUpdate(
-        { id: quiz.id },
-        { $setOnInsert: quiz },
+        { id: quizId },
+        { $setOnInsert: { ...quiz, id: quizId } },
         { upsert: true, new: true }
       );
     }
