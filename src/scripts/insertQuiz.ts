@@ -9,9 +9,9 @@ const insertQuiz = async () => {
     console.log('mongodb성공');
     const quizzes = [
       {
-        id: '1',
         title: '첫 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
+        order: 1,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -20,7 +20,7 @@ const insertQuiz = async () => {
         ],
         hint: '첫번쨰 힌트',
         startPosition: { x: 0, y: 0 },
-        goalPosition: { x: 2, y: 0 },
+        goalPosition: { x: 0, y: 3 },
         goalAction: 'shoot',
         commands: [
           {
@@ -34,9 +34,9 @@ const insertQuiz = async () => {
         ],
       },
       {
-        id: '2',
         title: '두 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
+        order: 2,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -63,9 +63,9 @@ const insertQuiz = async () => {
         ],
       },
       {
-        id: '3',
         title: '세 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
+        order: 3,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -88,9 +88,9 @@ const insertQuiz = async () => {
         ],
       },
       {
-        id: '4',
         title: '네 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
+        order: 4,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],

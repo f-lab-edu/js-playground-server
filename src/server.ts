@@ -15,39 +15,43 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Express + TypeScript 서버 실행 중!');
 });
 app.get(
-  '/api/quizzes/:id',
-  async (req: Request<{ id: string }>, res: Response): Promise<void> => {
+  `/api/quizzes/firstQuiz`,
+  async (req: Request, res: Response): Promise<void> => {
     try {
-      const quizId = req.params.id;
-      if (!validate(quizId)) {
-        res
-          .status(400)
-          .json({ success: false, message: '유효한 uuid 입력부탁' });
+      const firstQuiz = await Quiz.findOne({ order: 1 });
+      if (!firstQuiz) {
+        res.status(404).json({ message: '퀴즈없슴' });
         return;
       }
-      const quiz = await Quiz.findOne({ id: quizId });
-      if (!quiz) {
-        res
-          .status(404)
-          .json({ success: false, message: '퀴즈를 찾을 수 없습니다.' });
-        return;
-      }
-      res.status(200).json({ success: true, data: quiz });
+      res.json(firstQuiz);
     } catch (error) {
-      res.status(500).json({ success: false, message: '서버 오류 발생' });
+      res.status(500).json({ message: '서버오류발생' });
     }
   }
 );
-app.get(`/api/quizzes`, async (req: Request, res: Response): Promise<void> => {
-  try {
-    const quizzes = await Quiz.find({}, 'id title');
-    res.json(quizzes);
-  } catch (error) {
-    console.error('퀴즈 조회 오류', error);
-    res.status(500).json({ error: '퀴즈 조회 오류' });
+app.get(
+  '/api/quizzes/:id',
+  async (req: Request, res: Response): Promise<void> => {
+    try {
+      const currentQuiz = await Quiz.findOne({ id: req.params.id });
+      if (!currentQuiz) {
+        res.status(404).json({ message: '퀴즈없음' });
+        return;
+      }
+      const prevQuiz = await Quiz.findOne({ order: currentQuiz.order - 1 });
+      const nextQuiz = await Quiz.findOne({ order: currentQuiz.order + 1 });
+      res.json({
+        currentQuiz,
+        prevQuiz: prevQuiz,
+        nextQuiz: nextQuiz,
+      });
+    } catch (error) {
+      res.status(500).json({ message: '서버오류' });
+    }
   }
-});
+);
 app.listen(PORT, () => {
   console.log(`서버 실행: http://localhost:${PORT}`);
 });
+
 connectDB();
