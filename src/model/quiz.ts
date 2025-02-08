@@ -5,6 +5,7 @@ const quizSchema = new mongoose.Schema(
     id: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     description: { type: String, required: true },
+    order: { type: Number, required: true },
     grid: { type: [[Number]], required: true },
     hint: { type: String },
     startPosition: {
