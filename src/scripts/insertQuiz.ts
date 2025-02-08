@@ -11,7 +11,6 @@ const insertQuiz = async () => {
       {
         title: '첫 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
-        order: 1,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -36,7 +35,6 @@ const insertQuiz = async () => {
       {
         title: '두 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
-        order: 2,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -65,7 +63,6 @@ const insertQuiz = async () => {
       {
         title: '세 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
-        order: 3,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -90,7 +87,6 @@ const insertQuiz = async () => {
       {
         title: '네 번째 퀴즈',
         description: '목표 지점까지 이동한 후 공격하세요.',
-        order: 4,
         grid: [
           [0, 0, 0, 0],
           [0, 0, 0, 0],
@@ -113,11 +109,15 @@ const insertQuiz = async () => {
         ],
       },
     ];
-    const quizzesWithUUID = quizzes.map((quiz) => ({
+    const quizUUID = quizzes.map(() => v4());
+    const quizzesLinkedList = quizzes.map((quiz, index) => ({
       ...quiz,
-      id: v4(),
+      id: quizUUID[index],
+      isFirst: index === 0,
+      prevId: index === 0 ? null : quizUUID[index - 1],
+      nextId: index === quizUUID.length - 1 ? null : quizUUID[index + 1],
     }));
-    await Quiz.insertMany(quizzesWithUUID);
+    await Quiz.insertMany(quizzesLinkedList);
     process.exit(0);
   } catch (error) {
     console.error('오류 발생:', error);

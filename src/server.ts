@@ -3,7 +3,6 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { connectDB } from './db.ts';
 import { Quiz } from './model/quiz.ts';
-import { validate } from 'uuid';
 
 dotenv.config();
 
@@ -18,7 +17,7 @@ app.get(
   `/api/quizzes/firstQuiz`,
   async (req: Request, res: Response): Promise<void> => {
     try {
-      const firstQuiz = await Quiz.findOne({ order: 1 });
+      const firstQuiz = await Quiz.findOne({ isFirst: true });
       if (!firstQuiz) {
         res.status(404).json({ message: '퀴즈없슴' });
         return;
@@ -38,12 +37,8 @@ app.get(
         res.status(404).json({ message: '퀴즈없음' });
         return;
       }
-      const prevQuiz = await Quiz.findOne({ order: currentQuiz.order - 1 });
-      const nextQuiz = await Quiz.findOne({ order: currentQuiz.order + 1 });
       res.json({
         currentQuiz,
-        prevQuizId: prevQuiz?.id,
-        nextQuizId: nextQuiz?.id,
       });
     } catch (error) {
       res.status(500).json({ message: '서버오류' });
