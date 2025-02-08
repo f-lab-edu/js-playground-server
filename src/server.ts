@@ -42,8 +42,8 @@ app.get(
       const nextQuiz = await Quiz.findOne({ order: currentQuiz.order + 1 });
       res.json({
         currentQuiz,
-        prevQuiz: prevQuiz,
-        nextQuiz: nextQuiz,
+        prevQuizId: prevQuiz?.id,
+        nextQuizId: nextQuiz?.id,
       });
     } catch (error) {
       res.status(500).json({ message: '서버오류' });
