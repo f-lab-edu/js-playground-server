@@ -3,7 +3,8 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "mongoose": "^8.9.6"
+    "mongoose": "^8.9.6",
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@types/cors": "^2.8.17",
@@ -20,13 +21,14 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.7.3"
   },
+  "type": "module",
   "scripts": {
-    "dev": "nodemon --exec ts-node src/server.ts",
+    "dev": "NODE_OPTIONS='--loader ts-node/esm' nodemon src/server.ts",
     "start": "node dist/server.js",
     "build": "tsc",
     "lint": "eslint . --ext .ts",
     "lint:fix": "eslint . --ext .ts --fix",
     "prettier": "prettier --write \"src/**/*.ts\"",
-    "seed": "npx ts-node src/scripts/insertQuiz.ts"
+    "seed": "node --loader ts-node/esm src/scripts/insertQuiz.ts"
   }
 }
